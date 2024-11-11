@@ -39,7 +39,7 @@ class JuegoApiController{
             return $this->view->response("El juego con el id = $id no existe", 404);
         }
 
-        $tienePedidos = $this->model->getPedidosById($id);
+        $tienePedidos = $this->modelP->getPedidos($id);
         
         if($tienePedidos){
             return $this->view->response("El juego con el id = $id no se puede borrar porq 

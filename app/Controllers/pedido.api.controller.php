@@ -5,7 +5,7 @@ class PedidoApiController{
     private $view;
 
     public function __construct(){
-        $this->model = new PedidoModel();
+        $this->model = new PedidoApiModel();
         $this->view = new JSONView();
     }
 
@@ -30,7 +30,7 @@ class PedidoApiController{
             return $this->view->response("No se encontro el pedido con el id = $id", 404);
         }
 
-        $this->model->detelePedido($id);
+        $this->model->deletePedido($id);
         $this->view->response("El pedido se elimino con exito");
     }
 
@@ -51,6 +51,29 @@ class PedidoApiController{
         $precio = $req->body->precio;
 
         $this->model->insertPedido($idJuego,$cantidad,$precio);
+        $this->view->response("Se creo el pedido con exito", 201);
         
+    }
+
+    public function update($req, $res){
+        $id = $req->params->id_pedido;
+
+        $pedido = $this->model->getPedidoById($id);
+
+        if(!$pedido){
+            return $this->view->response("No existe el pedido con el id = $id", 404);
+        }
+
+        if(empty($req->body->cantidad) || empty($req->body->precio)){
+           return $this->view->response("Faltan completar datos", 400);
+        }
+
+        $cantidad = $req->body->cantidad;
+        $precio = $req->body->precio;
+
+        $this->model->updatePedido($id, $cantidad, $precio);
+        
+        $resultado = $this->model->getPedidoById($id);
+        $this->view->response($resultado,200);
     }
 }

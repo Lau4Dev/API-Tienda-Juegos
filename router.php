@@ -15,7 +15,7 @@
  $router->addRoute('juego/:id',     'PUT',    'JuegoApiController',     'update');
  $router->addRoute('pedidos/:id',   'GET',    'PedidoApiController',    'get');
  $router->addRoute('pedidos/:id',   'DELETE', 'PedidoApiController',    'delete');
- $router->addRoute('pedidos/:id',       'POST',   'PedidoApiController',    'create');
+ $router->addRoute('pedidos/:id',   'POST',   'PedidoApiController',    'create');
  $router->addRoute('pedidos/:id',   'PUT',    'PedidoApiController',    'update');
 
  $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);
