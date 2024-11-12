@@ -10,6 +10,7 @@ class JuegoApiModel{
     public function getJuegos($filtrarGeneros = null, $orderBy = false){
         $sql = 'SELECT * FROM juego';
 
+        //preguntar
         if($filtrarGeneros != null) {
             $params = explode("/", $filtrarGeneros);
             if($params[0] == 'true'){

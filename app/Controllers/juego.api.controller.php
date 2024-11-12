@@ -23,7 +23,6 @@ class JuegoApiController{
             $filtrarGeneros = $req->query->generos;
         }
 
-        //Para preguntar;
         $orderBy = false;
 
         if(isset($req->query->orderBy)){
