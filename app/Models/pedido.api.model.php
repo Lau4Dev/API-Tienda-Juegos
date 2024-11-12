@@ -40,6 +40,7 @@ class PedidoApiModel{
     }
 
     public function updatePedido($id,$cantidad,$precio){
-        
+        $query = $this->db->prepare('UPDATE pedidosjuego SET cantidad = ?, precio = ? WHERE id_pedido = ?');
+        $query->execute([$cantidad, $precio, $id]);
     }
 }

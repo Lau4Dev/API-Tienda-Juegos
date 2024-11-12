@@ -7,8 +7,33 @@ class JuegoApiModel{
         $this->db = new PDO('mysql:host=localhost; dbname=tiendajuegos; charset=utf8', 'root', '');
     }
 
-    public function getJuegos(){
-        $query = $this->db->prepare('SELECT * FROM juego');
+    public function getJuegos($filtrarGeneros = null, $orderBy = false){
+        $sql = 'SELECT * FROM juego';
+
+        if($filtrarGeneros != null) {
+            $params = explode("/", $filtrarGeneros);
+            if($params[0] == 'true'){
+                $sql .= " WHERE generos = $params[1]";
+            }
+               
+        }
+
+
+        if($orderBy){
+            switch($orderBy){
+                case 'nombre_juego':
+                    $sql .= ' ORDER by nombre_juego';
+                    break;
+                case 'generos':
+                    $sql .= ' ORDER by generos';
+                    break;
+                case 'califiacion':
+                    $sql .= ' ORDER by califiacion';
+                    break;
+            }
+        }
+
+        $query = $this->db->prepare($sql);
         $query->execute();
 
         $juegos = $query->fetchAll(PDO::FETCH_OBJ);

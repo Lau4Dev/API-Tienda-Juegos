@@ -15,7 +15,22 @@ class JuegoApiController{
     }
 
     public function getAll($req, $res){
-        $juegos = $this->model->getJuegos();
+        
+        //Para preguntar
+        $filtrarGeneros = null;
+        
+        if(isset($req->query->generos)) {
+            $filtrarGeneros = $req->query->generos;
+        }
+
+        //Para preguntar;
+        $orderBy = false;
+
+        if(isset($req->query->orderBy)){
+            $orderBy = $req->query->orderBy;
+        }
+
+        $juegos = $this->model->getJuegos($filtrarGeneros,$orderBy);
 
         return $this->view->response($juegos);
     }
