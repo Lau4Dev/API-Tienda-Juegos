@@ -38,7 +38,11 @@ class JuegoApiModel{
 
 
         $query = $this->db->prepare($sql);
-        $query->execute([':genero' => "%$filtrarGenero%"]);
+        if($filtrarGenero != null){
+            $query->execute([':genero' => "%$filtrarGenero%"]);
+        }else{
+            $query->execute();
+        }
 
         $juegos = $query->fetchAll(PDO::FETCH_OBJ);
 

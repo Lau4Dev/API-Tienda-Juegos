@@ -45,7 +45,7 @@ class JuegoApiController{
         $juego = $this->model->getJuegoById($id);
 
         if(!$juego){
-            return $this->view->response("El juego con el id = $id no existe", 404);
+            return $this->view->response("El juego con el id:" . $req->params->califiacion .  " no existe",404);
         }
 
         return $this->view->response($juego);
@@ -89,13 +89,17 @@ class JuegoApiController{
         $resultado = $this->model->getJuegoById($juego);
         return $this->view->response($resultado,201);
     }
-    public function update($req,$res){
-        $id=$req->params->Id_Juego;
+
+    public function update($req, $res){
+        if(!isset ($req->params->Id_Juego)){
+            return $this->view->response(" id no existe,no se seteo un id",400);
+        }
+        $id = $req->params->Id_Juego;
 
         $juego = $this->model->getJuegoById($id);
 
         if(!$juego){
-            return $this->view->response("El juego con el id=$id no existe",404);
+            return $this->view->response("El juego con el id:" . $req->params->Id_Juego .  " no existe",404);
         }
 
         if(empty($req->body->nombre_juego)||empty($req->body->generos)||empty($req->body->califiacion)){

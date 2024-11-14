@@ -6,8 +6,17 @@ class PedidoApiModel{
     public function __construct(){
         $this->db = new PDO('mysql:host=localhost; dbname=tiendajuegos; charset=utf8', 'root', '');
     }
+    
+    public function getPedidos(){
+        
+        $query = $this->db->prepare('SELECT * FROM pedidojuegos');
+        $query->execute();
 
-    public function getPedidos($idJuego){
+        $pedidos = $query->fetchAll(PDO::FETCH_OBJ);
+        return $pedidos;
+    }
+
+    public function getPedidosByJuego($idJuego){
         $query = $this->db->prepare('SELECT * FROM pedidojuegos WHERE Id_Juego = ?');
         $query->execute([$idJuego]);
 
@@ -15,7 +24,7 @@ class PedidoApiModel{
 
         return $pedidos;
     }
-
+    
     public function getPedidoById($id){
         $query = $this->db->prepare('SELECT * FROM pedidojuegos WHERE id_pedido = ?');
         $query->execute([$id]);
@@ -31,7 +40,7 @@ class PedidoApiModel{
     }
 
     public function insertPedido($idJuego, $cantidad, $precio){
-        $query = $this->db->prepare('INSERT INTO pedidosjuego(cantidad,precio) VALUES(?,?) WHERE Id_Juego = ?');
+        $query = $this->db->prepare('INSERT INTO pedidosjuego (cantidad,precio) VALUES(?,?) WHERE Id_Juego = ?');
         $query->execute([$cantidad,$precio,$idJuego]);
 
         $id = $this->db->lastInsertId();

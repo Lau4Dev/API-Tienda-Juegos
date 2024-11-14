@@ -7,15 +7,16 @@
 
     $router = new Router();
 
- #                 endpoint         verbo      controller              metodo
- $router->addRoute('juego',         'GET' ,   'JuegoApiController',     'getAll');//juego?genero=accion
- $router->addRoute('juego/:id',     'GET',    'JuegoApiController',     'get');
- $router->addRoute('juego/:id',     'DELETE', 'JuegoApiController',     'delete');
- $router->addRoute('juego',         'POST',   'JuegoApiController',     'create');
- $router->addRoute('juego/:id',     'PUT',    'JuegoApiController',     'update');
- $router->addRoute('pedidos/:id',   'GET',    'PedidoApiController',    'get');
- $router->addRoute('pedidos/:id',   'DELETE', 'PedidoApiController',    'delete');
- $router->addRoute('pedidos/:id',   'POST',   'PedidoApiController',    'create');
- $router->addRoute('pedidos/:id',   'PUT',    'PedidoApiController',    'update');
+ #                 endpoint               verbo      controller                metodo
+ $router->addRoute('juego',               'GET' ,   'JuegoApiController',     'getAll');
+ $router->addRoute('juego/:Id_Juego',     'GET',    'JuegoApiController',     'get');
+ $router->addRoute('juego/:Id_Juego',     'DELETE', 'JuegoApiController',     'delete');
+ $router->addRoute('juego',               'POST',   'JuegoApiController',     'create');
+ $router->addRoute('juego/:Id_Juego',     'PUT',    'JuegoApiController',     'update');
+ $router->addRoute('pedidos',             'GET' ,   'PedidoApiController',    'getAll');
+ $router->addRoute('pedidos/:Id_Juego',   'GET',    'PedidoApiController',    'get');
+ $router->addRoute('pedidos/:id_pedido',  'DELETE', 'PedidoApiController',    'delete');
+ $router->addRoute('pedidos/:Id_Juego',   'POST',   'PedidoApiController',    'create');
+ $router->addRoute('pedidos/:id_pedido',  'PUT',    'PedidoApiController',    'update');
 
  $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);

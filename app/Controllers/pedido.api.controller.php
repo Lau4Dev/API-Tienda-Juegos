@@ -8,11 +8,18 @@ class PedidoApiController{
         $this->model = new PedidoApiModel();
         $this->view = new JSONView();
     }
+    
 
+    public function getAll($req, $res){
+        
+        $pedidos = $this->model->getPedidos();
+
+        return $this->view->response($pedidos);
+    }
     public function get($req, $res){
         $idJuego = $req->params->Id_Juego;
 
-        $pedidos = $this->model->getPedidos($idJuego);
+        $pedidos = $this->model->getPedidosByJuego($idJuego);
 
         if(!$pedidos){
             return $this->view->response("No se encontraron pedidos asociado al juego con el id = $idJuego", 404);
