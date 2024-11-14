@@ -40,8 +40,8 @@ class PedidoApiModel{
     }
 
     public function insertPedido($idJuego, $cantidad, $precio){
-        $query = $this->db->prepare('INSERT INTO pedidosjuego (cantidad,precio) VALUES(?,?) WHERE Id_Juego = ?');
-        $query->execute([$cantidad,$precio,$idJuego]);
+        $query = $this->db->prepare('INSERT INTO pedidojuegos (Id_Juego,cantidad,precio) VALUES(?,?,?)');
+        $query->execute([$idJuego,$cantidad,$precio]);
 
         $id = $this->db->lastInsertId();
 
@@ -49,7 +49,7 @@ class PedidoApiModel{
     }
 
     public function updatePedido($id,$cantidad,$precio){
-        $query = $this->db->prepare('UPDATE pedidosjuego SET cantidad = ?, precio = ? WHERE id_pedido = ?');
+        $query = $this->db->prepare('UPDATE pedidojuegos SET cantidad = ?, precio = ? WHERE id_pedido = ?');
         $query->execute([$cantidad, $precio, $id]);
     }
 }

@@ -11,7 +11,7 @@ class PedidoApiController{
     
 
     public function getAll($req, $res){
-        
+
         $pedidos = $this->model->getPedidos();
 
         return $this->view->response($pedidos);
@@ -57,9 +57,15 @@ class PedidoApiController{
         $cantidad = $req->body->cantidad;
         $precio = $req->body->precio;
 
-        $this->model->insertPedido($idJuego,$cantidad,$precio);
-        $this->view->response("Se creo el pedido con exito", 201);
+        $id = $this->model->insertPedido($idJuego,$cantidad,$precio);
+
+        if(!$id){
+            return $this->view->response("No se pudo crear el pedido", 500);
+        }
         
+        $this->view->response("Se creo el pedido con exito", 201);
+        $resultado = $this->model->getPedidoById($id);
+        return $resultado;
     }
 
     public function update($req, $res){

@@ -85,7 +85,8 @@ class JuegoApiController{
         if(!$juego){
             return $this->view->response("Error al insertar el juego", 500);
         }
-
+        
+        $this->view->response("Se creo el pedido con exito", 201);
         $resultado = $this->model->getJuegoById($juego);
         return $this->view->response($resultado,201);
     }
